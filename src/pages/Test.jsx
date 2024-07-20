@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Modal, Button, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Test = ({ onMintComplete }) => {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -23,10 +27,13 @@ const Test = ({ onMintComplete }) => {
       return;
     }
 
+    setIsLoading(true); // Show loader
+
     const formData = new FormData();
     formData.append('file', file);
 
     try {
+      // Upload file
       const response = await axios.post('http://localhost:3000/uploadFile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -35,7 +42,8 @@ const Test = ({ onMintComplete }) => {
 
       const filePath = response.data.filePath;
 
-      const nftResponse = await axios.post('http://localhost:3000/createNFT', {
+      // Mint NFT
+      await axios.post('http://localhost:3000/createNFT', {
         issuerSecret,
         receiverSecret,
         receiverPublicKey,
@@ -48,11 +56,22 @@ const Test = ({ onMintComplete }) => {
         }
       });
 
-      console.log('NFT minted successfully:', nftResponse.data);
+      console.log('NFT minted successfully');
+      setIsModalVisible(true); // Show success modal
       onMintComplete();
     } catch (error) {
       console.error('Error minting NFT:', error);
+    } finally {
+      setIsLoading(false); // Hide loader
     }
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -93,9 +112,31 @@ const Test = ({ onMintComplete }) => {
         }}
         onMouseEnter={(e) => e.target.style.backgroundColor = '#45a049'}
         onMouseLeave={(e) => e.target.style.backgroundColor = '#4CAF50'}
+        disabled={isLoading} // Disable button while loading
       >
-        MINT NFT
+        {isLoading ? 'Minting...' : 'MINT NFT'}
       </button>
+      {isLoading && (
+        <div className="mt-4 flex justify-center items-center h-64">
+          <Spin 
+            indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} 
+            size="large" 
+          />
+        </div>
+      )}
+      <Modal
+        title="Success"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="ok" type="primary" onClick={handleOk}>
+            OK
+          </Button>
+        ]}
+      >
+        <p>Your NFT has been minted successfully!</p>
+      </Modal>
     </div>
   );
 };

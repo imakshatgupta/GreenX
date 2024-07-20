@@ -1,11 +1,13 @@
 import React,{useState,useEffect} from 'react';
-import { Layout, Menu,Modal,  Button, Card, Row, Col,Tag } from 'antd';
-import { UserOutlined,  } from '@ant-design/icons';
+import { Layout, Menu,Modal,  Button, Card, Row, Col,Tag, Drawer, Statistic } from 'antd';
+import { DollarCircleOutlined, TeamOutlined, UserOutlined,  } from '@ant-design/icons';
 import { PiPlant } from "react-icons/pi";
-import wheat from '../assets/wheat.jpeg';
-import corn from '../assets/corn.jpeg';
-import tomato from '../assets/tomato.jpeg';
-import maize from '../assets/maize.jpeg';
+import sandal from '../assets/sandal.jpg';
+import kesar from '../assets/kesar.jpg';
+import lavendar from '../assets/lavendar.jpg';
+import bamboo from '../assets/bamboo.jpg'
+import { Link, useNavigate } from 'react-router-dom';
+import { FaRupeeSign } from 'react-icons/fa';
 
 
 const colors = {
@@ -26,7 +28,8 @@ const FarmerDashboard = () => {
     const [isModalVisible2, setIsModalVisible2] = useState(false);
     const [phase, setPhase] = useState('Seeding');
     const [phase_one, setPhase_one] = useState('Seeding');
-    const [phase_two, setPhase_two] = useState('Seeding'); 
+    const [phase_two, setPhase_two] = useState('Seeding');
+    const navigate = useNavigate();
     
     
     const statuses = [
@@ -108,17 +111,59 @@ const FarmerDashboard = () => {
         
     return (
     <Layout className="min-h-screen bg-muted/40">
-  <Header className="flex h-20 ml-10 mr-10 w-auto border rounded-xl items-center px-4 bg-teal-600">
-  <a href="#" className="flex items-center gap-2">
-    <span className="text-2xl font-serif font-bold text-white">Farmer Dashboard</span>
-  </a>
-  <Menu mode="horizontal" className="ml-auto flex items-center bg-teal-600">
-    <Menu.Item key="dashboard">
-      <UserOutlined style={{ fontSize: '1.5rem' }} className="text-white" />
-    </Menu.Item>
-  </Menu>
-</Header>
+<div className="container mx-auto mt-4 px-4 md:px-8">
+      <header className="bg-teal-600 text-white py-4 px-6 md:px-10 flex items-center justify-between shadow-md rounded-2xl">
+        <Link to="/home" className="flex items-center gap-2 text-lg font-semibold">
+          <span className="text-2xl">GreenX</span>
+        </Link>
+        <nav className="hidden md:flex items-center gap-6 text-lg font-medium">
+          Farmer Dashboard
+        </nav>
+        <div className="flex items-center gap-4">
+          <Button className="bg-green-400 text-white hover:bg-green-500 rounded-lg shadow-md" size="lg" onClick={() => navigate('/cropform')}>
+            Add new Asset
+          </Button>
+        </div>
+      </header>
 
+      <div className="mt-8">
+        <Row gutter={16}>
+          <Col span={24} md={8}>
+            <Card className="p-4 shadow-lg rounded-lg">
+              <Statistic
+                title="Total Earnings"
+                value={10000} // Example value, replace with dynamic value
+                precision={2}
+                prefix={<FaRupeeSign />}
+                valueStyle={{ color: '#3f8600' }}
+              />
+            </Card>
+          </Col>
+          <Col span={24} md={8}>
+            <Card className="p-4 shadow-lg rounded-lg">
+              <Statistic
+                title="Percentage Earned on Crop"
+                value={12.5} // Example value, replace with dynamic value
+                precision={2}
+                suffix="%"
+                valueStyle={{ color: '#3f8600' }}
+              />
+            </Card>
+          </Col>
+          <Col span={24} md={8}>
+            <Card className="p-4 shadow-lg rounded-lg">
+              <Statistic
+                title="Number of Investors"
+                value={50} // Example value, replace with dynamic value
+                prefix={<TeamOutlined />}
+                valueStyle={{ color: '#3f8600' }}
+              />
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    </div>
+    
 
     <Content className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
   <div className="max-w-6xl w-full mx-auto grid gap-8">
@@ -139,12 +184,12 @@ const FarmerDashboard = () => {
     className='shadow-xl'
       hoverable
       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '16px', borderRadius: '8px' }}
-      cover={<img src={wheat} alt="Crop Image" width={160} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+      cover={<img src={sandal} alt="Crop Image" width={160} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
     >
       <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Wheat</h3>
-          <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'70px' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>SandalWood</h3>
+          <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'70px',textAlign:'justify' }}>
             {phase}
           </Tag>
         </div>
@@ -161,11 +206,11 @@ const FarmerDashboard = () => {
     className='shadow-xl'
       hoverable
       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '8px' }}
-      cover={<img src={tomato} alt="Crop Image" width={140} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+      cover={<img src={kesar} alt="Crop Image" width={140} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
     >
       <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Tomato</h3>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Saffron</h3>
           <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'100px' }}>
             {phase_one}
           </Tag>
@@ -184,11 +229,11 @@ const FarmerDashboard = () => {
     className='shadow-xl'
       hoverable
       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '16px', borderRadius: '8px' }}
-      cover={<img src={corn} alt="Crop Image" width={160} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+      cover={<img src={lavendar} alt="Crop Image" width={160} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
     >
       <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Corn</h3>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Lavendar</h3>
           <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'120px' }}>
             Sell
           </Tag>
@@ -207,11 +252,11 @@ const FarmerDashboard = () => {
     className='shadow-xl'
       hoverable
       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '8px' }}
-      cover={<img src={maize} alt="Crop Image" width={160} height={10} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+      cover={<img src={bamboo} alt="Crop Image" width={160} height={10} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
     >
       <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Maize</h3>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Bamboo</h3>
           <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500' ,marginLeft:'70px' }}>
             Harvesting
           </Tag>
@@ -241,7 +286,7 @@ const FarmerDashboard = () => {
           {/* Image Section */}
           <div className="bg-muted rounded-2xl overflow-hidden mb-6 md:mb-0 md:w-1/2">
             <img
-              src={wheat}
+              src={sandal}
               alt="Investor Profile"
               className="w-full mt-8 h-auto max-w-xs mx-auto rounded-3xl"
             />
@@ -305,7 +350,7 @@ const FarmerDashboard = () => {
           {/* Image Section */}
           <div className="bg-muted rounded-2xl overflow-hidden mb-6 md:mb-0 md:w-1/2">
             <img
-              src={tomato}
+              src={kesar}
               alt="Investor Profile"
               className="w-full mt-8 h-auto max-w-xs mx-auto rounded-3xl"
             />

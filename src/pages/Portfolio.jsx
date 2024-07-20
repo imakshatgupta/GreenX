@@ -1,17 +1,47 @@
 import React, { useState } from 'react';
-import { Button, Card, Table, Row, Col, Modal, Input, message } from 'antd';
-import { DollarCircleOutlined, ArrowUpOutlined, SmileOutlined, BarChartOutlined, CheckOutlined } from '@ant-design/icons';
+import { Button, Card, Table, Row, Col, Modal, Input, message, Drawer } from 'antd';
+import { DollarCircleOutlined, ArrowUpOutlined, SmileOutlined, BarChartOutlined, CheckOutlined, WalletFilled, WalletOutlined } from '@ant-design/icons';
 import Footer from './Footer';
 import Navbar from '../Components/Navbar';
 import PiechartcustomChart from './Piechartcustomchart';
 import LinechartChart from './LinechartChart';
 import BarchartChart from './BarchartChart';
 import Test from './Test';
+import { Link } from 'react-router-dom';
+import Wallet from '../Components/Wallet';
+import user from '../Components/users.json';
 
 export default function Portfolio() {
   const [modalVisible, setModalVisible] = useState(false);
   const [referralCode, setReferralCode] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
+  const [open, setOpen] = useState(false);
+  const [userType, setUserType] = useState(null);
+
+  const showDrawer = (type) => {
+    setUserType(type);
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+    setUserType(null);
+  };
+
+  const drawerHeaderStyle = {
+    display: 'none' // Hide the header
+  };
+
+  const drawerBodyStyle = {
+    padding: '0px', // Remove extra padding
+    backgroundColor: '#000000', // Set your desired background color
+  };
+
+  const drawerContentWrapperStyle = {
+    height: '70vh', // Set the height of the Drawer
+    overflow: 'auto' // Add overflow to handle scrolling if necessary
+  };
+
 
   const cropData = [
     { key: '1', crop: 'Corn', value: '$80,000', profitLoss: '+$5,000', percentage: '32%', profitLossClass: 'text-green-500' },
@@ -68,9 +98,21 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {contextHolder}
-      <Navbar />
+<div className="min-h-screen bg-gray-100">
+<div className="container mx-auto mt-4">
+            <header className="bg-teal-600 text-white py-4 px-6 md:px-10 flex items-center justify-between shadow-md rounded-2xl">
+                <Link to="/home" className="flex items-center gap-2 text-lg font-semibold">
+                    <span className="text-2xl">GreenX</span>
+                </Link>
+                <nav className="hidden md:flex items-center gap-6 text-lg font-bold">
+                    Investor Dashboard
+                </nav>
+                <Button type="link" style={{ padding: 0, height: 'auto', lineHeight: 'normal' }} onClick={() => showDrawer('investor')}>
+                    <WalletOutlined style={{ fontSize: '2rem', color: 'white' }} />
+                </Button>
+            </header>
+        </div>
+    
 
       <div className="container mx-auto mt-6 px-4 md:px-10">
         <Row gutter={[16, 16]}>
@@ -211,6 +253,19 @@ export default function Portfolio() {
         </Modal>
       </div>
       <Footer />
+      <Drawer
+        placement="right"
+        onClose={onClose}
+        open={open}
+        width={360} // Set the width for a smaller drawer
+        headerStyle={drawerHeaderStyle} // Hide the header
+        bodyStyle={drawerBodyStyle} // Apply body styles
+        contentWrapperStyle={drawerContentWrapperStyle} // Apply content wrapper styles
+      >
+        {userType === 'investor' && (
+          <Wallet data={user.investor} />
+        )}
+      </Drawer>
     </div>
   );
 }

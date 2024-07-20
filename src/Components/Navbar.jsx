@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Drawer } from 'antd';
 import Wallet from './Wallet';
 import user from './users.json';
@@ -7,6 +7,7 @@ import user from './users.json';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [userType, setUserType] = useState(null);
+  const navigate = useNavigate();
 
   const showDrawer = (type) => {
     setUserType(type);
@@ -53,8 +54,8 @@ export default function Navbar() {
           </Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button className="bg-green-400 text-white hover:bg-green-500 rounded-lg shadow-md " size="lg" onClick={() => showDrawer('investor')}>For Investors</Button>
-          <Button className="border border-green-400 text-green-400 hover:bg-green-100 rounded-lg shadow-md" size="lg" onClick={() => showDrawer('farmer')}>For Farmers</Button>
+          <Button className="bg-green-400 text-white hover:bg-green-500 rounded-lg shadow-md " size="lg" onClick={()=>navigate("/portfolio")} >For Investors</Button>
+          <Button className="border border-green-400 text-green-400 hover:bg-green-100 rounded-lg shadow-md" size="lg" onClick={()=>navigate("/farmerdashboard")}>For Farmers</Button>
         </div>
       </header>
       <Drawer

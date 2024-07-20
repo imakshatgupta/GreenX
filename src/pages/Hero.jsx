@@ -11,7 +11,7 @@ export default function Hero({ showDrawer }) {
   return (
     <div>
       <Navbar />
-      <section className="bg-gray-100 py-12 md:py-20 lg:py-28 text-gray-900 shadow-3xl rounded-xl mx-4 mt-4 md:mx-10">
+      <section className="bg-gray-100 py-12 md:py-20 lg:py-28 text-gray-900 shadow-3xl rounded-xl mx-4 mt-8 md:mx-10">
         <div className="container px-4 md:px-6 grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-teal-600">
@@ -71,7 +71,7 @@ export default function Hero({ showDrawer }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
           <Card className="p-4 border border-gray-200 bg-white rounded-lg shadow-md">
             <div className="flex items-center gap-4 mb-4">
-              <Avatar className="w-12 h-12 border" src="/placeholder-user.jpg" />
+              <Avatar className="w-12 h-12 border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrvtqQcA8_UwXCQz7z1Ncfjpmux8EdjoCiiA&s" />
               <div>
                 <h3 className="font-bold text-gray-900">Rajesh Kumar</h3>
                 <p className="text-gray-600">Sandalwood Farmer</p>
@@ -83,7 +83,7 @@ export default function Hero({ showDrawer }) {
           </Card>
           <Card className="p-4 border border-gray-200 bg-white rounded-lg shadow-md">
             <div className="flex items-center gap-4 mb-4">
-              <Avatar className="w-12 h-12 border" src="/placeholder-user.jpg" />
+              <Avatar className="w-12 h-12 border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvjJdRcmKyaqRrjKC9KbZg5qi2WvQM2Q66VA&s" />
               <div>
                 <h3 className="font-bold text-gray-900">Anita Sharma</h3>
                 <p className="text-gray-600">Kesar Farmer</p>
