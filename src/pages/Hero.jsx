@@ -5,7 +5,6 @@ import { GlobalOutlined, EnvironmentOutlined, DollarOutlined } from '@ant-design
 import Data from './Data.jsx';
 import Footer from './Footer.jsx';
 
-
 const { Title, Paragraph } = Typography;
 
 export default function Hero({ showDrawer }) {
@@ -16,17 +15,17 @@ export default function Hero({ showDrawer }) {
         <div className="container px-4 md:px-6 grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-teal-600">
-              Invest in Sustainable Agriculture
+              Invest in Premium Agricultural Assets
             </h1>
             <p className="text-lg md:text-xl text-gray-700">
-              Discover investment opportunities that support local farmers and promote sustainable practices.
+              Discover investment opportunities in high-value agricultural assets like sandalwood and kesar.
             </p>
           </div>
           <img
             src="main.png"
             width={600}
             height={100}
-            alt="Sustainable Agriculture"
+            alt="Premium Agriculture"
             className="mx-auto rounded-xl overflow-hidden shadow-md"
           />
         </div>
@@ -39,7 +38,7 @@ export default function Hero({ showDrawer }) {
                 <GlobalOutlined style={{ fontSize: '32px', color: '#34d399' }} />
                 <Title level={3} className="text-teal-600">Global Reach</Title>
                 <Paragraph className="text-gray-700">
-                  Invest in sustainable agriculture projects around the world, supporting local communities and promoting global food security.
+                  Invest in premium agricultural assets around the world, supporting local communities and promoting global food security.
                 </Paragraph>
               </Space>
             </Col>
@@ -57,7 +56,7 @@ export default function Hero({ showDrawer }) {
                 <DollarOutlined style={{ fontSize: '32px', color: '#34d399' }} />
                 <Title level={3} className="text-teal-600">Attractive Returns</Title>
                 <Paragraph className="text-gray-700">
-                  Earn competitive returns while making a positive impact on communities and the environment through your sustainable agricultural investments.
+                  Earn competitive returns while making a positive impact on communities and the environment through your investments in premium agricultural assets.
                 </Paragraph>
               </Space>
             </Col>
@@ -74,24 +73,24 @@ export default function Hero({ showDrawer }) {
             <div className="flex items-center gap-4 mb-4">
               <Avatar className="w-12 h-12 border" src="/placeholder-user.jpg" />
               <div>
-                <h3 className="font-bold text-gray-900">John Doe</h3>
-                <p className="text-gray-600">Organic Farmer</p>
+                <h3 className="font-bold text-gray-900">Rajesh Kumar</h3>
+                <p className="text-gray-600">Sandalwood Farmer</p>
               </div>
             </div>
             <p className="text-gray-700">
-              John is a passionate organic farmer committed to sustainable practices. He grows a variety of fruits and vegetables using regenerative methods.
+              Rajesh is a dedicated sandalwood farmer using sustainable methods. His farm is known for producing high-quality sandalwood.
             </p>
           </Card>
           <Card className="p-4 border border-gray-200 bg-white rounded-lg shadow-md">
             <div className="flex items-center gap-4 mb-4">
               <Avatar className="w-12 h-12 border" src="/placeholder-user.jpg" />
               <div>
-                <h3 className="font-bold text-gray-900">Jane Arden</h3>
-                <p className="text-gray-600">Dairy Farmer</p>
+                <h3 className="font-bold text-gray-900">Anita Sharma</h3>
+                <p className="text-gray-600">Kesar Farmer</p>
               </div>
             </div>
             <p className="text-gray-700">
-              Jane runs a small dairy farm, focusing on ethical and sustainable practices. She is committed to animal welfare and producing high-quality dairy products.
+              Anita runs a small kesar farm, focusing on sustainable and ethical farming practices. She produces some of the finest kesar in the region.
             </p>
           </Card>
         </div>

@@ -1,14 +1,18 @@
-import React from 'react';
-import { Button, Card, Table, Row, Col } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, Card, Table, Row, Col, Modal, Input, message } from 'antd';
+import { DollarCircleOutlined, ArrowUpOutlined, SmileOutlined, BarChartOutlined, CheckOutlined } from '@ant-design/icons';
+import Footer from './Footer';
+import Navbar from '../Components/Navbar';
 import PiechartcustomChart from './Piechartcustomchart';
 import LinechartChart from './LinechartChart';
 import BarchartChart from './BarchartChart';
-import { DollarCircleOutlined, UserOutlined, MenuOutlined, ArrowUpOutlined, SmileOutlined, BarChartOutlined } from '@ant-design/icons';
-import Footer from './Footer';
-import Navbar from '../Components/Navbar';
+import Test from './Test';
 
 export default function Portfolio() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [referralCode, setReferralCode] = useState('');
+  const [messageApi, contextHolder] = message.useMessage();
+
   const cropData = [
     { key: '1', crop: 'Corn', value: '$80,000', profitLoss: '+$5,000', percentage: '32%', profitLossClass: 'text-green-500' },
     { key: '2', crop: 'Soybeans', value: '$60,000', profitLoss: '+$3,000', percentage: '24%', profitLossClass: 'text-green-500' },
@@ -47,8 +51,25 @@ export default function Portfolio() {
     },
   ];
 
+  const showModal = () => {
+    if (referralCode.trim() === '') {
+      messageApi.error('Please enter a referral code');
+      return;
+    }
+    messageApi.success('Referral code accepted');
+    setTimeout(() => {
+      setReferralCode("");
+      setModalVisible(true);
+    }, 2000); // Delay of 2 seconds before opening the modal
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
+      {contextHolder}
       <Navbar />
 
       <div className="container mx-auto mt-6 px-4 md:px-10">
@@ -96,14 +117,24 @@ export default function Portfolio() {
             </Card>
           </Col>
           <Col xs={24} md={12} lg={6}>
-            <Card className="bg-orange-50 border-orange-200 shadow-lg rounded-lg">
+            <Card className="bg-orange-50 border-orange-200 shadow-lg rounded-lg pb-1">
               <Card.Meta
-                title="Market Conditions"
+                title="Refer Now"
                 description={
-                  <>
-                    <div className="text-2xl font-bold text-orange-600">Stable</div>
-                    <p className="text-xs text-gray-600">No significant changes</p>
-                  </>
+                  <div className='flex flex-row items-center justify-between'>
+                    <Input 
+                      placeholder="Enter referral code"
+                      value={referralCode}
+                      onChange={(e) => setReferralCode(e.target.value)}
+                      className="mt-2"
+                    />
+                    <Button
+                      type="primary"
+                      icon={<CheckOutlined />}
+                      onClick={showModal}
+                      className="mt-2 ml-2 w-4 p-4"
+                    />
+                  </div>
                 }
                 avatar={<BarChartOutlined className="text-orange-500" />}
               />
@@ -169,8 +200,17 @@ export default function Portfolio() {
             </Card>
           ))}
         </div>
-        <Footer />
+
+        <Modal
+          title="Referral Code Details"
+          visible={modalVisible}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <Test onMintComplete={handleCancel} />
+        </Modal>
       </div>
+      <Footer />
     </div>
   );
 }
