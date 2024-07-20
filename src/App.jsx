@@ -5,6 +5,7 @@ import Portfolio from "./pages/Portfolio.jsx";
 import CropForm from "./pages/CropForm.jsx"; 
 import FarmerDashboard from "./pages/FarmerDashboard.jsx";
 import Temp from "./pages/temp.jsx";
+import Test from "./pages/Test.jsx";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
           <Route path="/cropform" element={<CropForm />} />
           <Route path="/farmerdashboard" element={<FarmerDashboard />} />
           <Route path="/temp" element={<Temp />} />
+            <Route path='/test' element={<Test />} />
+          <Route path='/navbar' element = {<Navbar />} />
+          <Route path='/home' element={<Hero/>} />
+          <Route path='/farmerdashboard' element={<FarmerDashboard/>} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
