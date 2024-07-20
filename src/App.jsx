@@ -18,7 +18,6 @@ function App() {
           <Route path="/farmerdashboard" element={<FarmerDashboard />} />
           <Route path="/temp" element={<Temp />} />
             <Route path='/test' element={<Test />} />
-          <Route path='/navbar' element = {<Navbar />} />
           <Route path='/home' element={<Hero/>} />
           <Route path='/farmerdashboard' element={<FarmerDashboard/>} />
         </Routes>
