@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Table, Row, Col, Modal, Input, message, Drawer } from 'antd';
 import { DollarCircleOutlined, ArrowUpOutlined, SmileOutlined, BarChartOutlined, CheckOutlined, WalletFilled, WalletOutlined } from '@ant-design/icons';
-import Footer from './Footer';
-import Navbar from '../Components/Navbar';
 import PiechartcustomChart from './Piechartcustomchart';
 import LinechartChart from './LinechartChart';
 import BarchartChart from './BarchartChart';
@@ -10,6 +8,12 @@ import Test from './Test';
 import { Link } from 'react-router-dom';
 import Wallet from '../Components/Wallet';
 import user from '../Components/users.json';
+import Footer from './Footer';
+import avocado from '../assets/avocado.jpeg';
+import saffron from '../assets/saffron.jpg';
+import sandalwood from '../assets/sandalwood.jpg';
+
+
 
 export default function Portfolio() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,8 +51,6 @@ export default function Portfolio() {
     { key: '1', crop: 'Corn', value: '$80,000', profitLoss: '+$5,000', percentage: '32%', profitLossClass: 'text-green-500' },
     { key: '2', crop: 'Soybeans', value: '$60,000', profitLoss: '+$3,000', percentage: '24%', profitLossClass: 'text-green-500' },
     { key: '3', crop: 'Wheat', value: '$40,000', profitLoss: '-$2,000', percentage: '16%', profitLossClass: 'text-red-500' },
-    { key: '4', crop: 'Cotton', value: '$35,000', profitLoss: '+$4,000', percentage: '14%', profitLossClass: 'text-green-500' },
-    { key: '5', crop: 'Rice', value: '$35,000', profitLoss: '-$1,000', percentage: '14%', profitLossClass: 'text-red-500' },
   ];
 
   const cardData = [
@@ -96,6 +98,12 @@ export default function Portfolio() {
   const handleCancel = () => {
     setModalVisible(false);
   };
+  // Data for trending profitable crops
+  const trendingCrops = [
+    { key: '1', crop: 'Saffron', rate: 'Rs.3,000/kg', profit: '+$500/kg', image: saffron },
+    { key: '2', crop: 'Sandalwood', rate: 'Rs.1,200/kg', profit: '+$300/kg', image: sandalwood },
+    { key: '3', crop: 'Avocado', rate: 'Rs.1,800/ton', profit: '+$200/ton', image: avocado},
+  ];
 
   return (
 <div className="min-h-screen bg-gray-100">
@@ -201,6 +209,32 @@ export default function Portfolio() {
             </Table>
           </Card>
         </div>
+
+        {/* New Card for Trending Profitable Crops */}
+        <div className="mt-10">
+  <Card title="Trending Profitable Crops" className="rounded-lg border-gray-200">
+    <Row gutter={[16, 16]}>
+      {trendingCrops.map((crop) => (
+        <Col xs={24} md={12} lg={8} key={crop.key}>
+          <Card className="flex flex-col items-center shadow-lg rounded-lg border-gray-200 p-0">
+            <img
+              src={crop.image}
+              className="h-40 w-64 object-cover rounded-t-lg mb-2"
+              alt={crop.crop} // Add alt text for accessibility
+            />
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">{crop.crop}</h3>
+              <p className="text-gray-600 text-sm">Current Rate: {crop.rate}</p>
+            </div>
+          <button className='bg-teal-600 text-white p-2 ml-20 border rounded-xl '>Book Now </button>
+          </Card>
+        </Col>
+      ))}
+    </Row>
+  </Card>
+</div>
+
+
 
         <Card title="Investment Visualizations" className="mt-6 shadow-lg rounded-lg border-gray-200">
           <div className="flex flex-wrap gap-6">
