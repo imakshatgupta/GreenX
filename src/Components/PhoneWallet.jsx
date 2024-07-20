@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PasswordScreen from "./PasswordScreen";
-import user from "./users.json";
+import user from "./address.json"
 import * as DiamSdk from "diamante-sdk-js";
 import axios from "axios";
 import {
@@ -26,19 +26,20 @@ export default function PhoneWallet({}) {
     const [transactionHistory, setTransactionHistory] = useState([]);
     const [account, setAccount] = useState(null);
     const [userData,setUserData] = useState({
-        senderSecretKey: 'GCKMH4PIORG24WIEXYUGALFFQZ7CZRKCALBZOLDTCDD5MBZ4AIQTQSL3',
-        receiverPublicKey: '',
+        senderSecretKey: 'SC3OCQUG35G4UQDX6HX4UUMU5ZOKI354YXB74KQ4DNO6AWDMVRJXQGYM',
+        receiverPublicKey: 'GCFZSOZJ74DQ5N6AZJF27IA6MJJ2RE5P6KDIOI66VBOAUNGN5ALWH5HJ',
         amount: ''
     });
     const server = new DiamSdk.Horizon.Server(
       "https://diamtestnet.diamcircle.io"
     );
 
+
     useEffect(() => {
-        const publicKey = user.investor[0].publicKey;
+        const publicKey =user[2].publicKey;
        const formattedKey = `${publicKey.slice(0, 4)}******${publicKey.slice(-4)}`;
         setMaskedKey(formattedKey);
-      }, [user.investor[0].publicKey]);
+      }, [user[1].publicKey]);
 
   
     const handleNetworkChange = (event) => {
@@ -54,7 +55,8 @@ export default function PhoneWallet({}) {
     
 
     const handlePayment = async () => {
-        const jsonString = JSON.stringify(transactionData);
+        const jsonString = JSON.stringify(userData);
+        console.log(userData)
         const base64Encoded = btoa(jsonString);
         const encodedText = encodeURIComponent(base64Encoded);
     const smsLink = `sms:+919350728474?body=${encodedText}`;
@@ -131,7 +133,7 @@ export default function PhoneWallet({}) {
           </div>
 
           <div className="text-center mb-4">
-            <h2 className="text-xl font-semibold">{user.investor[0].username}</h2>
+            <h2 className="text-xl font-semibold">Akshat</h2>
             <div className="rounded-lg flex items-center justify-center space-x-2">
               <span>{maskedKey}</span>
             </div>
@@ -281,27 +283,14 @@ export default function PhoneWallet({}) {
            <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
                <h2 className="text-xl font-semibold mb-4">Enter Your Credentials</h2>
    
-               <div className="mb-4">
-                   <label className="block mb-2">Sender Secret Key</label>
-                   <input
-                       type="text"
-                       value={user.investor[0].publicKey}
-                       onChange={(e) =>
-                           setUserData({
-                               ...userData,
-                               senderSecretKey: e.target.value,
-                           })
-                       }
-                       className="w-full p-2 rounded-lg bg-gray-700 text-white"
-                   />
-               </div>
+               
    
                <div className="mb-4">
                    <label className="block mb-2">Receiver Public Key</label>
                    <input
                        type="text"
                     //    value={transactionData.receiverPublicKey}
-                    // value={user.farmer[0].privateKey}
+                    value={user[2].publicKey}
                        onChange={(e) =>
                            setUserData({
                                ...userData,
