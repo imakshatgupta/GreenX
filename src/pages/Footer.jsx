@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 export default function Footer() {
   return (
     <div>
-         <footer className="bg-black text-white py-8 px-4 md:px-6">
+         <footer className="bg-teal-600 text-white py-8 px-4 md:px-6">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 font-bold text-xl">
             {/* <LeafIcon className="h-6 w-6" /> */}
