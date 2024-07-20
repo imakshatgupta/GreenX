@@ -1,4 +1,4 @@
-# 🌱 High-Value Agricultural Investments Platform
+# 🌱 GreenX
 
 ## Project Overview
 Our platform offers a revolutionary approach to investing in high-value agricultural crops like sandalwood, bamboo, cotton, and more. It bridges the gap between farmers and investors by leveraging blockchain technology to create a secure, transparent, and efficient environment for agricultural investments.
@@ -24,16 +24,11 @@ Both farmers and investors have access to a comprehensive dashboard displaying:
 - Risk assessment
 - Returns
 
-### 🍃 Seasonal Farmer Booking for Organic Food
-Wealthy individuals seeking organic food but lacking the means to farm themselves can book farmers seasonally. This ensures job security for farmers and provides organic food for investors. Any surplus can be sold for profit.
-
 ### 🎁 Token-based Rewards and Loyalty Programs
 - **Rewards System:** Token-based rewards and loyalty platform.
 - **Management:** Create and manage reward tokens.
 - **User Interface:** Customers can earn and redeem rewards easily.
-- **Tracking:** Efficient tracking and management of loyalty points.
 - **Secure Transfers:** Secure and efficient token transfers between users and businesses.
-- **POS Integration:** Seamless integration with existing point-of-sale systems.
 
 ### 💳 Offline Crypto Payment System
 Developed an offline crypto payment system to facilitate transactions even without internet access.
@@ -57,46 +52,11 @@ Developed an offline crypto payment system to facilitate transactions even witho
 - **Comprehensive Dashboard:** Provides detailed insights and management tools for both farmers and investors.
 - **Offline Payment System:** Facilitates transactions without internet access.
 
-## Getting Started
-
-### Prerequisites
-- Internet connection (for online features)
-- Supported browser
-- Wallet for blockchain transactions (compatible with Diamante blockchain)
-
-### Installation
-1. Register on our platform as a farmer or an investor.
-2. Complete the KYC process for verification.
-3. Explore the dashboard and utilize the features according to your role.
-
-### Usage
-
-**Farmers:**
-- List your crops with details like type, current condition, and phase.
-- Update the crop status regularly to keep investors informed.
-- View and manage your bookings and investments through the dashboard.
-
-**Investors:**
-- Browse through available crops and assess risks and returns.
-- Invest in single crops or diversified portfolios as per your preference.
-- Track your investments and returns through the dashboard.
-
-### Rewards and Loyalty Program
-- Earn tokens through various activities on the platform.
-- Redeem tokens for rewards through our user-friendly interface.
-- Track your loyalty points and manage your rewards efficiently.
-
 ## Technology Stack
 - **Blockchain:** Diamante blockchain
-- **Backend:** Secure and scalable architecture
-- **Frontend:** User-friendly interface
-- **AI Model:** For creating diversified investment portfolios
-
-## Contributing
-We welcome contributions from the community. Please read our contributing guidelines before making any changes.
-
-## Sponsors
-- **Diamante Blockchain:** Our sponsor providing secure and efficient blockchain solutions.
-
-## Contact
-For support or inquiries, please contact us at [support@ourplatform.com](mailto:support@ourplatform.com).
+- **Backend:** Nodejs
+- **Frontend:** Reactjs , TailwindCSS
+  
+## References and Materials Used
+- **Code Reference:** Some of the code implementations and ideas were inspired by examples and resources available on [DiamCircle GitHub repository](https://github.com/diamcircle).
+- **Assistance:** This project also utilized assistance from ChatGPT, a large language model trained by OpenAI, for drafting and refining documentation.
