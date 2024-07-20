@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import diam from "../assets/diam.png"
 
 export default function PasswordScreen({ onPasswordSubmit }) {
   const [password, setPassword] = useState('');
@@ -16,7 +17,7 @@ export default function PasswordScreen({ onPasswordSubmit }) {
   return (
     <div className="flex flex-col items-center justify-center">
     <img
-      src="https://blockstack.tech/wp-content/themes/blockstack/assets/images/web3/diamante-net/diamante-net-banner.png"
+      src={diam}
       alt="Logo"
       className="mb-4 w-[200px]"
     /> {/* Replace with your logo */}

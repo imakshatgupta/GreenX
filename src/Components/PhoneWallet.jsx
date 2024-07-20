@@ -15,6 +15,7 @@ import {
   CheckOutlined,
 } from "@ant-design/icons";
 import transactionData from "../Components/users.json"
+import { Link } from "react-router-dom";
 export default function PhoneWallet({}) {
     const [activeTab, setActiveTab] = useState("History");
     const [network, setNetwork] = useState("Diam Testnet");
@@ -102,12 +103,14 @@ export default function PhoneWallet({}) {
             </button>
             <UserOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
             <p style={{ color: "#1890ff", fontSize: "12px" }}>
-              {data[0].username}
+              {/* {data[0].username} */}
             </p>
           </div>
           <div className="flex flex-col items-center space-y-4">
             <LockOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
+            <Link to="/home">
             <PlusOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
+            </Link>
             <SettingOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
             <PoweroffOutlined
               style={{ fontSize: "24px", color: "#1890ff" }}

@@ -40,7 +40,7 @@ export default function Navbar() {
           <span className="text-2xl">GreenX</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link to="#" className="hover:underline hover:text-green-400 transition-colors duration-300">
+          <Link to="/kyc" className="hover:underline hover:text-green-400 transition-colors duration-300">
             Explore
           </Link>
           <Link to="#" className="hover:underline hover:text-green-400 transition-colors duration-300">
