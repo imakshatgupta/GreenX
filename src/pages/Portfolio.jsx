@@ -227,7 +227,7 @@ export default function Portfolio() {
 
         <h1 className="font-bold mt-8 mb-4 text-3xl">Trending News</h1>
 
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap gap-6 mb-5">
           {cardData.map((card, index) => (
             <Card title={card.title} className="flex-1 shadow-lg rounded-lg border-gray-200" key={index}>
               <div className="grid gap-4">

@@ -31,7 +31,7 @@ export default function Hero({ showDrawer }) {
         </div>
       </section>
       <section className="py-12 md:py-20 lg:py-28 bg-white shadow-lg rounded-xl mx-4 md:mx-10 mt-10">
-        <div className="container px-4 md:px-6 text-center">
+        <div className="container px-4 md:px-6 text-center ml-[55px]">
           <Row gutter={[16, 16]} justify="space-between">
             <Col xs={24} md={12} lg={8}>
               <Space direction="vertical" size="middle" className="p-4 border border-gray-200 rounded-lg shadow-md">
