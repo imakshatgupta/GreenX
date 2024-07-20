@@ -1,61 +1,29 @@
-import React,{useState} from 'react';
-import { Layout, Menu, Avatar, Dropdown,Modal,  Button, Card, Row, Col } from 'antd';
-import { Link } from 'react-router-dom'; // Adjust based on your routing library
-import { UserOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
+import React,{useState,useEffect} from 'react';
+import { Layout, Menu,Modal,  Button, Card, Row, Col,Tag } from 'antd';
+import { UserOutlined,  } from '@ant-design/icons';
 import { PiPlant } from "react-icons/pi";
-import { LuLeaf } from "react-icons/lu";
-import { LuWallet } from "react-icons/lu";
+import wheat from '../assets/wheat.jpeg';
+import corn from '../assets/corn.jpeg';
+import tomato from '../assets/tomato.jpeg';
+import maize from '../assets/maize.jpeg';
+
 
 const colors = {
-    headerBackground: '#90EE90', 
+    headerBackground: '#6dbf6d', 
     linkHover: '#1b4332', // Darker Green
     cardBackground: '#eaf4e0', // Light Green
     buttonBackground: '#4caf50', // Green
     buttonText: '#ffffff', // White
-    textPrimary: '#2e7d32', // Medium Green
+    textPrimary: '#2e7d32', // Medium Green 
     textSecondary: '#4b4b4b', // Dark Grey
     borderColor: '#a5d6a7', // Light Green Border
     cardShadow: '#c5e1a5' // Light Green Shadow
   };
-
-
-
-const menu = (
-    <Menu>
-    <Menu.Item key="profile" icon={<UserOutlined />}>
-      <a href="#" className="flex items-center gap-2">
-        Profile
-      </a>
-    </Menu.Item>
-    <Menu.Item key="settings" icon={<SettingOutlined />}>
-      <a href="#" className="flex items-center gap-2">
-        Settings
-      </a>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="signout" icon={<LogoutOutlined />}>
-      <a href="#" className="flex items-center gap-2">
-        Sign out
-      </a>
-    </Menu.Item>
-  </Menu>
-);
-
-
-
-
-
 const { Header, Content } = Layout;
 
 const FarmerDashboard = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
-    const [isModalVisible3, setIsModalVisible3] = useState(false);
-    const [investormodal, setInvestormodal] = useState(false);
-    const [investormodal2, setInvestormodal2] = useState(false);
-    const [investormodal3, setInvestormodal3] = useState(false);
-
-    
     const [phase, setPhase] = useState('Seeding');
     const [phase_one, setPhase_one] = useState('Seeding');
     const [phase_two, setPhase_two] = useState('Seeding'); 
@@ -77,142 +45,239 @@ const FarmerDashboard = () => {
         { id: 5, label: 'Sell' },
        
     ];
-    const statuses_two = [
-        { id: 1, label: 'Germination' },
-        { id: 2, label: 'Seedling Development' },
-        { id: 3, label: 'Vegetative Growth' },
-        { id: 4, label: 'Harvesting' },
-        { id: 5, label: 'Sell' },
-        
-    ];
-    
+  
     const [selectedStatus_one, setSelectedStatus_one] = useState(statuses_one);
-    const [selectedStatus_two, setSelectedStatus_two] = useState(statuses_two);
     const [selectedStatus, setSelectedStatus] = useState(statuses);
 
     const showModal = () => {
       setIsModalVisible(true);
     };
+  
     const showModal2 = () => {
       setIsModalVisible2(true);
     };
-    const showModal3 = () => {
-      setIsModalVisible3(true);
-    };
+   
 
-    const showInvestorModal = () => {
-        setInvestormodal(true);
-    }
-    const showInvestorModal2 = () => {
-        setInvestormodal2(true);
-    }
-    const showInvestorModal3 = () => {
-        setInvestormodal3(true);
-    }
-  
     const handleCancel = () => {
       setIsModalVisible(false);
       setIsModalVisible2(false);
-    setIsModalVisible3(false);
-    setInvestormodal(false);
-    setInvestormodal2(false);
-    setInvestormodal3(false);
+   
     };
 
     const handleStatusChange = (statusId) => {
-        const selected = statuses.find(status => status.id === statusId);
-        setSelectedStatus(statusId);
-        setPhase(selected.label);
-        console.log(selected.label);
-      };
+      const selected = statuses.find(status => status.id === statusId);
+      setSelectedStatus(statusId);
+      setPhase(selected.label);
+      console.log(selected.label);
+      localStorage.setItem('selectedStatus', statusId);
+    };
+  
+    const handleStatusChange_one = (statusId) => {
+      const selected = statuses_one.find(status => status.id === statusId);
+      setSelectedStatus_one(statusId);
+      setPhase_one(selected.label);
+      localStorage.setItem('selectedStatus_one', statusId);
+    };
 
-      const handleStatusChange_one = (statusId) => {
-        const selected = statuses_one.find(status => status.id === statusId);
-        setSelectedStatus_one(statusId);
-        setPhase_one(selected.label);
-      }
-        const handleStatusChange_two = (statusId) => {
-            const selected = statuses_two.find(status => status.id === statusId);
-            setSelectedStatus_two(statusId);
-            setPhase_two(selected.label);
+    useEffect(() => {
+      const savedStatus = localStorage.getItem('selectedStatus');
+      if (savedStatus) {
+        const statusId = parseInt(savedStatus, 10);
+        setSelectedStatus(statusId);
+        const selected = statuses.find(status => status.id === statusId);
+        if (selected) {
+          setPhase(selected.label);
         }
+      }
+  
+      const savedStatus_one = localStorage.getItem('selectedStatus_one');
+      if (savedStatus_one) {
+        const statusId = parseInt(savedStatus_one, 10);
+        setSelectedStatus_one(statusId);
+        const selected = statuses_one.find(status => status.id === statusId);
+        if (selected) {
+          setPhase_one(selected.label);
+        }
+      }
+    }, []);
+      
+
+   
+       
+    
         
     return (
     <Layout className="min-h-screen bg-muted/40">
-    <Header className="flex h-20 w-full items-center px-4 md:px-6" style={{ backgroundColor: colors.headerBackground }}>
-      <a href="#" className="flex items-center gap-2">
-        <span className="text-2xl font-serif font-bold text-white">Farmer Dashboard</span>
-      </a>
-      <Menu mode="horizontal" className="ml-auto flex items-center gap-4 md:gap-6" style={{ backgroundColor: colors.headerBackground }}>
-        <Menu.Item key="dashboard">
-          <a href="#" className="group inline-flex h-9 w-max items-center justify-center rounded-md text-white py-2 text-sm font-medium transition-colors hover:bg-[#1b4332]">
-            Dashboard
-          </a>
-        </Menu.Item>
-        <Menu.Item key="investments">
-          <a href="#" className="group inline-flex h-9 w-max items-center justify-center rounded-md py-2 text-sm font-medium transition-colors hover:bg-[#1b4332]">
-            Investments
-          </a>
-        </Menu.Item>
-        <Menu.Item key="crops">
-          <a href="#" className="group inline-flex h-9 w-max items-center justify-center rounded-md py-2 text-sm font-medium transition-colors hover:bg-[#1b4332]">
-            Crops
-          </a>
-        </Menu.Item>
-        <Menu.Item key="settings">
-          <a href="#" className="group inline-flex h-9 w-max items-center justify-center rounded-md py-2 text-sm font-medium transition-colors hover:bg-[#1b4332]">
-            Settings
-          </a>
-        </Menu.Item>
-      </Menu>
-      <Dropdown overlay={menu} trigger={['click']} className="ml-4">
-        <a onClick={(e) => e.preventDefault()} className="ant-dropdown-link" href="#">
-          <Avatar size="large" src="/placeholder-user.jpg" className="h-9 w-9" />
-          <span className="sr-only">Toggle user menu</span>
-        </a>
-      </Dropdown>
-    </Header>
+  <Header className="flex h-20 ml-10 mr-10 w-auto border rounded-xl items-center px-4 bg-teal-600">
+  <a href="#" className="flex items-center gap-2">
+    <span className="text-2xl font-serif font-bold text-white">Farmer Dashboard</span>
+  </a>
+  <Menu mode="horizontal" className="ml-auto flex items-center bg-teal-600">
+    <Menu.Item key="dashboard">
+      <UserOutlined style={{ fontSize: '1.5rem' }} className="text-white" />
+    </Menu.Item>
+  </Menu>
+</Header>
+
 
     <Content className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
-      <div className="max-w-6xl w-full mx-auto grid gap-8">
-        <Card style={{ backgroundColor: colors.cardBackground, borderColor: colors.borderColor, boxShadow: `0 4px 8px ${colors.cardShadow}` }}>
-          <div className='flex'>
-            <PiPlant className='h-8 w-8 mt-1 mr-3'/>
-           <h1 className='font-bold text-2xl'>Crop Listing</h1> 
-          </div>
-          <h1 className='text-left ml-8 mb-10'>Manage your crop listings and track their growth.</h1>
-          <Row gutter={[16, 16]} justify="space-around">
-            <Col xs={24} md={12} lg={8}>
-              <Card 
-                title={
-                  <div className="flex items-center">
-                    <LuLeaf className="h-6 w-6 mr-2" style={{ color: colors.textPrimary }} />
-                    <span className="text-left font-bold text-xl">{/* Crop Name */}Tomatoes</span>
-                  </div>
-                } 
-                extra={<span className='font-semibold text-xs'>Phase: {phase}</span>}
-              >
-                <p className='text-left text-lg mb-4'><strong>Expected Yield:</strong> 2,000 kg</p>
-                <p className='text-lg text-left mb-4'><strong>Timeline:</strong> 2 months</p>
-                <Button className='bg-black text-white mt-4' size="medium" onClick={showModal}>Update</Button>
-                {/* <Button className='bg-black text-white ml-4' size="medium" type="default" >View Details</Button> */}
-              </Card>
-            </Col>
-        <Modal
-        title="Update Crop Status"
+  <div className="max-w-6xl w-full mx-auto grid gap-8">
+    <div className="flex flex-col gap-8">
+      {/* Crop Listing Header */}
+      <div className="flex items-center justify-between p-4 rounded-lg ">
+        <div className="flex items-center">
+          <PiPlant className="h-8 w-8 mt-1 mr-3" />
+          <h1 className="font-bold text-4xl">Crop Listed</h1>
+        </div>
+       
+      </div>
+
+      {/* Crop Cards */}
+      <Row gutter={[16, 16]} justify="space-around">
+  <Col span={12}>
+    <Card
+    className='shadow-xl'
+      hoverable
+      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '16px', borderRadius: '8px' }}
+      cover={<img src={wheat} alt="Crop Image" width={160} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+    >
+      <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Wheat</h3>
+          <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'70px' }}>
+            {phase}
+          </Tag>
+        </div>
+        <p style={{ color: '#888', fontSize: '14px',fontWeight:"500" }}>Yield:500 kg</p>
+        <p style={{ color: '#888', fontSize: '14px',fontWeight:"500" }}>TimeLine: 2 month</p>
+        <Button onClick={showModal} className='border rounded-xl bg-teal-500 text-white hover:bg-teal-600'  style={{ justifySelf: 'end' }}>
+          View More
+        </Button>
+      </div>
+    </Card>
+  </Col>
+  <Col span={12}>
+    <Card
+    className='shadow-xl'
+      hoverable
+      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '8px' }}
+      cover={<img src={tomato} alt="Crop Image" width={140} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+    >
+      <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Tomato</h3>
+          <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'100px' }}>
+            {phase_one}
+          </Tag>
+        </div>
+        <p style={{ color: '#888', fontSize: '14px',fontWeight:"500" }}>Yield:800 kg</p>
+        <p style={{ color: '#888', fontSize: '14px',fontWeight:"500" }}>TimeLine: 4 month</p>        <Button onClick={showModal2} className='border rounded-xl bg-teal-500 text-white hover:bg-teal-600'  style={{ justifySelf: 'end' }}>
+          View More
+        </Button>
+      </div>
+    </Card>
+  </Col>
+</Row>
+<Row gutter={[16, 16]} justify="space-around">
+  <Col span={12}>
+    <Card
+    className='shadow-xl'
+      hoverable
+      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '16px', borderRadius: '8px' }}
+      cover={<img src={corn} alt="Crop Image" width={160} height={160} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+    >
+      <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Corn</h3>
+          <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500',marginLeft:'120px' }}>
+            Sell
+          </Tag>
+        </div>
+        <p style={{ color: '#888', fontSize: '14px',fontWeight:"500" }}>Yield:200 kg</p>
+        <p style={{ color: '#888', fontSize: '14px',fontWeight:"500" }}>TimeLine: 6 month</p>
+
+        <Button className='border rounded-xl bg-teal-500 text-white hover:bg-teal-600'  style={{ justifySelf: 'end' }}>
+          View More 
+        </Button>
+      </div>
+    </Card>
+  </Col>
+  <Col span={12}>
+    <Card
+    className='shadow-xl'
+      hoverable
+      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', padding: '16px', borderRadius: '8px' }}
+      cover={<img src={maize} alt="Crop Image" width={160} height={10} style={{ borderRadius: '8px', objectFit: 'cover' }} />}
+    >
+      <div style={{ flex: 1, display: 'grid', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600' }}>Maize</h3>
+          <Tag color="blue" style={{ padding: '4px 12px', borderRadius: '16px', fontSize: '14px', fontWeight: '500' ,marginLeft:'70px' }}>
+            Harvesting
+          </Tag>
+        </div>
+        <p style={{ color: '#888', fontSize: '14px' ,fontWeight:'500' }}>Yield: 100kg</p>
+        <p style={{ color: '#888', fontSize: '14px' ,fontWeight:'500' }}>Timeline: 3 months</p>
+
+        <Button  className='border rounded-xl bg-teal-500 text-white hover:bg-teal-600'  style={{ justifySelf: 'end' }}>
+          View More
+        </Button>
+      </div>
+    </Card>
+  </Col>
+</Row>
+
+    </div>
+
+    {/* Modals */}
+    <Modal
         visible={isModalVisible}
-        onCancel={handleCancel}
+        onCancel={() => setIsModalVisible(false)}
         footer={null}
-        width={900} // Increase modal width
+        width={800}
         className="custom-modal"
       >
-        <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="mb-6 text-3xl font-bold text-gray-800">Crop Status</h2>
-          <div className="flex items-center justify-between w-full max-w-4xl relative">
+        <div className="flex flex-col md:flex-row p-4 bg-gray-100 rounded-lg shadow-lg">
+          {/* Image Section */}
+          <div className="bg-muted rounded-2xl overflow-hidden mb-6 md:mb-0 md:w-1/2">
+            <img
+              src={wheat}
+              alt="Investor Profile"
+              className="w-full mt-8 h-auto max-w-xs mx-auto rounded-3xl"
+            />
+          </div>
+
+          {/* Details Section */}
+          <div className="w-full md:w-1/2 p-4">
+            <div className="bg-muted rounded-lg p-2">
+              <h2 className="text-2xl text-center font-bold mb-4">Investor Details</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="font-bold">Name</div>
+                <div className="font-bold">Investment</div>
+                <div className="font-bold">Ownership</div>
+                {/* Example Entries */}
+                <div>Akshat</div>
+                <div>$250,000</div>
+                <div>10%</div>
+                <div>Aman</div>
+                <div>$150,000</div>
+                <div>5%</div>
+                <div>Harsh</div>
+                <div>$100,000</div>
+                <div>3%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Status Section */}
+        <div className="p-6 rounded-lg shadow-xl mt-6 bg-gray-100">
+          <h2 className="mb-4 text-xl font-bold text-gray-800">Crop Status</h2>
+          <div className="flex flex-wrap items-center justify-center w-full max-w-4xl relative">
             {statuses.map((status, index) => (
-              <div key={status.id} className="relative flex flex-col items-center">
+              <div key={status.id} className="relative flex flex-col items-center mx-4 my-2">
                 <div
-                  className={`flex items-center justify-center w-12 h-12 rounded-full ${selectedStatus>= status.id ? 'bg-green-500' : 'bg-gray-400'} text-white text-lg`}
+                  className={`flex items-center justify-center w-12 h-12 rounded-full ${selectedStatus >= status.id ? 'bg-green-500' : 'bg-gray-400'} text-white text-lg cursor-pointer`}
                   onClick={() => handleStatusChange(status.id)}
                 >
                   {status.id}
@@ -221,10 +286,7 @@ const FarmerDashboard = () => {
                   {status.label}
                 </span>
                 {index < statuses.length - 1 && (
-                  <div
-                    className="absolute top-1/2 w-10 h-1 "
-                    style={{ left: 'calc(50% - 0.5px)' }}
-                  />
+                  <div  />
                 )}
               </div>
             ))}
@@ -232,289 +294,76 @@ const FarmerDashboard = () => {
         </div>
       </Modal>
 
-
-            <Col xs={24} md={12} lg={8}>
-        <Card
-          title={
-            <div className="flex items-center">
-              <LuLeaf className="h-6 w-6 mr-2" />
-              <span className="text-left font-bold text-xl">Tomatoes</span>
-            </div>
-          }
-          extra={<span className='font-semibold'> Phase: {phase_one}</span>}
-        >
-          <p className='text-left text-lg mb-4'><strong>Expected Yield:</strong> 2,000 kg</p>
-          <p className='text-lg text-left mb-4'><strong>Timeline:</strong> 2 months</p>
-          <Button className='bg-black text-white mt-4' size="medium" onClick={showModal2}>
-            Update
-          </Button>
-          {/* <Button className='bg-black text-white ml-4' size="medium" type="default">
-            View Details
-          </Button> */}
-        </Card>
-      </Col>
-
       <Modal
-        title="Update Crop Status"
         visible={isModalVisible2}
-        onCancel={handleCancel}
+        onCancel={() => setIsModalVisible2(false)}
         footer={null}
-        width={900} // Increase modal width
+        width={800}
         className="custom-modal"
       >
-        <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="mb-6 text-3xl font-bold text-gray-800">Crop Status</h2>
-          <div className="flex items-center justify-between w-full max-w-4xl relative">
+        <div className="flex flex-col md:flex-row p-4 bg-gray-100 rounded-lg shadow-lg">
+          {/* Image Section */}
+          <div className="bg-muted rounded-2xl overflow-hidden mb-6 md:mb-0 md:w-1/2">
+            <img
+              src={tomato}
+              alt="Investor Profile"
+              className="w-full mt-8 h-auto max-w-xs mx-auto rounded-3xl"
+            />
+          </div>
+
+          {/* Details Section */}
+          <div className="w-full md:w-1/2 p-4">
+            <div className="bg-muted rounded-lg p-2">
+              <h2 className="text-2xl text-center font-bold mb-4">Investor Details</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="font-bold">Name</div>
+                <div className="font-bold">Investment</div>
+                <div className="font-bold">Ownership</div>
+                {/* Example Entries */}
+                <div>John Doe</div>
+                <div>$250,000</div>
+                <div>10%</div>
+                <div>Jane Smith</div>
+                <div>$150,000</div>
+                <div>5%</div>
+                <div>Robert Brown</div>
+                <div>$100,000</div>
+                <div>3%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Status Section */}
+        <div className="p-6 rounded-lg shadow-xl mt-6 bg-gray-100">
+          <h2 className="mb-4 text-xl font-bold text-gray-800">Crop Status</h2>
+          <div className="flex flex-wrap items-center justify-center w-full max-w-4xl relative">
             {statuses_one.map((status, index) => (
-              <div key={status.id} className="relative flex flex-col items-center">
+              <div key={status.id} className="relative flex flex-col items-center mx-4 my-2">
                 <div
-                  className={`flex items-center justify-center w-12 h-12 rounded-full ${selectedStatus_one >= status.id ? 'bg-green-500' : 'bg-gray-400'} text-white text-lg`}
+                  className={`flex items-center justify-center w-12 h-12 rounded-full ${selectedStatus_one >= status.id ? 'bg-green-500' : 'bg-gray-400'} text-white text-lg cursor-pointer`}
                   onClick={() => handleStatusChange_one(status.id)}
                 >
                   {status.id}
                 </div>
-                <span className={`mt-2 text-base ${selectedStatus >= status.id ? 'text-green-500' : 'text-gray-700'}`}>
+                <span className={`mt-2 text-base ${selectedStatus_one >= status.id ? 'text-green-500' : 'text-gray-700'}`}>
                   {status.label}
                 </span>
-                {index < statuses.length - 1 && (
-                 <div
-                 className="absolute top-1/2 w-10 h-1 "
-                 style={{ left: 'calc(50% - 0.5px)' }}
-               />
+                {index < statuses_one.length - 1 && (
+                  <div className="" />
                 )}
               </div>
             ))}
           </div>
         </div>
       </Modal>
+  </div>
+</Content>
 
 
-            <Col xs={24} md={12} lg={8}>
-            <Card 
-    title={
-      <div className="flex items-center">
-        <LuLeaf className="h-6 w-6 mr-2" />
-        <span className="text-left font-bold text-xl">Wheat</span>
-      </div>
-    } 
-    extra={<span className='font-semibold'> Phase:{phase_two}</span>}
-  >                <p className='text-left text-lg mb-4'><strong>Expected Yield:</strong> 3,500 kg</p>
-                <p className='text-lg text-left mb-4'><strong>Timeline:</strong> 3 months</p>
-                <Button className='bg-black text-white mt-4' onClick={showModal3} size="medium">Update</Button>
-                {/* <Button className='bg-black text-white ml-4' size="medium" type="default" >View Details</Button> */}
-              </Card>
-            </Col>
-            <Modal
-        title="Update Crop Status"
-        visible={isModalVisible3}
-        onCancel={handleCancel}
-        footer={null}
-        width={900} // Increase modal width
-        className="custom-modal"
-      >
-        <div className="flex flex-col items-center justify-center w-full p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="mb-6 text-3xl font-bold text-gray-800">Crop Status</h2>
-          <div className="flex items-center justify-between w-full max-w-4xl relative">
-            {statuses_two.map((status, index) => (
-              <div key={status.id} className="relative flex flex-col items-center">
-                <div
-                  className={`flex items-center justify-center w-12 h-12 rounded-full ${selectedStatus_two >= status.id ? 'bg-green-500' : 'bg-gray-400'} text-white text-lg`}
-                  onClick={() => handleStatusChange_two(status.id)}
-                >
-                  {status.id}
-                </div>
-                <span className={`mt-2 text-base ${selectedStatus >= status.id ? 'text-green-500' : 'text-gray-700'}`}>
-                  {status.label}
-                </span>
-                {index < statuses.length - 1 && (
-                 <div
-                 className="absolute top-1/2 w-10 h-1 "
-                 style={{ left: 'calc(50% - 0.5px)' }}
-               />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </Modal>
-          </Row>
-        </Card>
-      </div>
-      <Card style={{ backgroundColor: colors.cardBackground, borderColor: colors.borderColor, boxShadow: `0 4px 8px ${colors.cardShadow}` }}>
-          <div className='flex'>
-            <LuWallet className='h-8 w-8 mt-1 mr-3'/>
-           <h1 className='font-bold text-2xl'>Investor Details</h1> 
-          </div>
-          <h1 className='text-left ml-8 mb-10'>View the investments made by investors in your crops.</h1>
-          <Row gutter={[16, 16]} justify="space-around">
-            <Col xs={24} md={12} lg={8}>
-              <Card 
-                title={
-                  <div className="flex items-center">
-                    <UserOutlined className="h-8 w-8 mr-2"  />
-                    <span className="text-left font-bold text-xl">John Doe</span>
-                  </div>
-                } 
-                extra={<span className='font-semibold' >Investor</span>}
-                className="border-green-500 shadow-lg"
-              >                
-                <p className='text-left text-lg mb-4' >
-                  <strong>Invested Crops:</strong> Tomatoes, Corn
-                </p>
-                <p className='text-lg text-left mb-4' >
-                  <strong>Total Investment:</strong> $10,000
-                </p>
-                <Button className='bg-black text-white ml-4 mt-8' size="medium" onClick={showInvestorModal} type="default">View Details</Button>
-              </Card>
-            </Col>
 
-            <Modal
-             visible={investormodal}
-             onCancel={handleCancel}
-             footer={null}
-             width={900} // Increase modal width
-             className="custom-modal">
-            <div className="grid gap-6 py-6">
-          
-          <div className="grid gap-2">
-            <p className="font-bold text-xl ">Investment Breakdown</p>
-            <div className="grid gap-2">
-              <div className="flex items-center justify-between">
-                <p className='font-bold'>Corn</p>
-                <p className='font-bold'>$5,000</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className='font-bold'>Tomatos</p>
-                <p className='font-bold'>$5,000</p>
-              </div>
-              
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-muted-foreground">Current Investment Value</p>
-            <p className="text-2xl font-bold">$10,000</p>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-muted-foreground font-bold text-xl">Projected Returns</p>
-            <p>
-              Based on current market conditions, your investment is projected to yield a 15% return over the next 6
-              months.
-            </p>
-          </div>
-        </div>
-            </Modal>
-            <Col xs={24} md={12} lg={8}>
-            <Card 
-    title={
-      <div className="flex items-center">
-        <UserOutlined className="h-6 w-6 mr-2" />
-        <span className="text-left font-bold text-xl">Jane Smith</span>
-      </div>
-    } 
-    extra={<span className='font-semibold'> Investor</span>}
-  >                <p className='text-left text-lg mb-4'><strong>Invested Crops:
-</strong> Wheat</p>
-                <p className='text-lg text-left mb-4'><strong>Total Investment:
-                </strong> $5,000
-                </p>
-                <Button className='bg-black text-white ml-4 mt-8' size="medium" type="default" onClick={showInvestorModal2} >View Details</Button>
-              </Card>
-            </Col>
-            <Modal
-             visible={investormodal2}
-             onCancel={handleCancel}
-             footer={null}
-             width={900} // Increase modal width
-             className="custom-modal">
-            <div className="grid gap-6 py-6">
-          
-          <div className="grid gap-2">
-            <p className="font-bold text-xl ">Investment Breakdown</p>
-            <div className="grid gap-2">
-              <div className="flex items-center justify-between">
-                <p className='font-bold'>Wheat</p>
-                <p className='font-bold'>$5,000</p>
-              </div>
-             
-              
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-muted-foreground">Current Investment Value</p>
-            <p className="text-2xl font-bold">$5,000</p>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-muted-foreground font-bold text-xl">Projected Returns</p>
-            <p>
-              Based on current market conditions, your investment is projected to yield a 15% return over the next 6
-              months.
-            </p>
-          </div>
-        </div>
-            </Modal>
-            <Col xs={24} md={12} lg={8}>
-            <Card 
-    title={
-      <div className="flex items-center">
-        <LuLeaf className="h-6 w-6 mr-2" />
-        <span className="text-left font-bold text-xl">Sarah Lee
-        </span>
-      </div>
-    } 
-    extra={<span className='font-semibold'> Investor</span>}
-  >                <p className='text-left text-lg mb-4'><strong>Invested Crops:
-</strong> Tomatoes, Corn, Wheat
-</p>
-                <p className='text-lg text-left mb-4'><strong>Total Investment:
-                :</strong> $15,000
-                </p>
-                <Button className='bg-black text-white ml-4' size="medium" type="default" onClick={showInvestorModal3} >View Details</Button>
-              </Card>
-            </Col>
-            <Modal
-             visible={investormodal3}
-             onCancel={handleCancel}
-             footer={null}
-             width={900} // Increase modal width
-             className="custom-modal">
-            <div className="grid gap-6 py-6">
-          
-          <div className="grid gap-2">
-            <p className="font-bold text-xl ">Investment Breakdown</p>
-            <div className="grid gap-2">
-             
-              <div className="flex items-center justify-between">
-                <p className='font-bold'>Tomatos</p>
-                <p className='font-bold'>$5,000</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className='font-bold'>Corn</p>
-                <p className='font-bold'>$7,000</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className='font-bold'>Wheat</p>
-                <p className='font-bold'>$3,000</p>
-              </div>
-              
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-muted-foreground">Current Investment Value</p>
-            <p className="text-2xl font-bold">$15,000</p>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-muted-foreground font-bold text-xl">Projected Returns</p>
-            <p>
-              Based on current market conditions, your investment is projected to yield a 15% return over the next 6
-              months.
-            </p>
-          </div>
-        </div>
-            </Modal>
-          </Row>
-        </Card>
-    </Content>
-  </Layout>
+         </Layout>
+
 )};
 
 export default FarmerDashboard;
