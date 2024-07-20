@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <div className="container mx-auto mt-4">
       <header className="bg-teal-600 text-white py-4 px-6 md:px-10 flex items-center justify-between shadow-md rounded-2xl">
-        <Link to="#" className="flex items-center gap-2 text-lg font-semibold">
+        <Link to="/home" className="flex items-center gap-2 text-lg font-semibold">
           <span className="text-2xl">GreenX</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">

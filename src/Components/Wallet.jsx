@@ -13,6 +13,7 @@ import {
   PoweroffOutlined,
   CheckOutlined,
 } from "@ant-design/icons";
+import transactionData from "../Components/users.json"
 
 export default function Wallet({ data }) {
   const [activeTab, setActiveTab] = useState("History");
