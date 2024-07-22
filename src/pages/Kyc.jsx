@@ -37,7 +37,7 @@ export default function Kyc() {
     <div
     className="min-h-screen flex items-center justify-center bg-gray-100"
     style={{
-      backgroundImage: `url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg')`,
+      backgroundImage: `url('')`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
     }}

@@ -34,7 +34,7 @@ const Test = ({ onMintComplete }) => {
 
     try {
       // Upload file
-      const response = await axios.post('http://localhost:3000/uploadFile', formData, {
+      const response = await axios.post('https://greenx.onrender.com/uploadFile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -43,7 +43,7 @@ const Test = ({ onMintComplete }) => {
       const filePath = response.data.filePath;
 
       // Mint NFT
-      await axios.post('http://localhost:3000/createNFT', {
+      await axios.post('https://greenx.onrender.com/createNFT', {
         issuerSecret,
         receiverSecret,
         receiverPublicKey,

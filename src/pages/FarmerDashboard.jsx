@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Layout, Menu,Modal,  Button, Card, Row, Col,Tag, Drawer, Statistic } from 'antd';
+import { Layout, Menu,Modal,  Button, Card, Row, Col,Tag, Drawer, Statistic, Input } from 'antd';
 import { DollarCircleOutlined, TeamOutlined, UserOutlined,  } from '@ant-design/icons';
 import { PiPlant } from "react-icons/pi";
 import sandal from '../assets/sandal.jpg';
@@ -103,6 +103,26 @@ const FarmerDashboard = () => {
         }
       }
     }, []);
+
+    const [withDrawModal, setWithDrawModal] = useState(false);
+    const [amount, setAmount] = useState('');
+    
+    const handleConfirm = () => {
+      if (amount) {
+        alert(`₹${amount} has been successfully withdrawn`);
+        setAmount('');
+        setWithDrawModal(false);
+      } else {
+        alert('Please enter a valid amount');
+      }
+    }
+
+    const setWithDraw=()=>{
+      setWithDrawModal(true)
+    }
+
+  
+
       
 
    
@@ -113,7 +133,7 @@ const FarmerDashboard = () => {
     <Layout className="min-h-screen bg-muted/40">
 <div className="container mx-auto mt-4 px-4 md:px-8">
       <header className="bg-teal-600 text-white py-4 px-6 md:px-10 flex items-center justify-between shadow-md rounded-2xl">
-        <Link to="/home" className="flex items-center gap-2 text-lg font-semibold">
+        <Link to="/" className="flex items-center gap-2 text-lg font-semibold">
           <span className="text-2xl">GreenX</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-lg font-medium">
@@ -127,41 +147,70 @@ const FarmerDashboard = () => {
       </header>
 
       <div className="mt-8">
-        <Row gutter={16}>
-          <Col span={24} md={8}>
-            <Card className="p-4 shadow-lg rounded-lg">
+      <Row gutter={16}>
+        <Col span={24} md={8}>
+          <Card className="p-4 shadow-lg rounded-lg">
+            <div className="flex justify-between items-center">
               <Statistic
                 title="Total Earnings"
-                value={10000} // Example value, replace with dynamic value
+                value={"1,24,980"} // Example value, replace with dynamic value
                 precision={2}
                 prefix={<FaRupeeSign />}
                 valueStyle={{ color: '#3f8600' }}
               />
-            </Card>
-          </Col>
-          <Col span={24} md={8}>
-            <Card className="p-4 shadow-lg rounded-lg">
-              <Statistic
-                title="Percentage Earned on Crop"
-                value={12.5} // Example value, replace with dynamic value
-                precision={2}
-                suffix="%"
-                valueStyle={{ color: '#3f8600' }}
-              />
-            </Card>
-          </Col>
-          <Col span={24} md={8}>
-            <Card className="p-4 shadow-lg rounded-lg">
-              <Statistic
-                title="Number of Investors"
-                value={50} // Example value, replace with dynamic value
-                prefix={<TeamOutlined />}
-                valueStyle={{ color: '#3f8600' }}
-              />
-            </Card>
-          </Col>
-        </Row>
-      </div>
+              <Button className="bg-green-400 text-white hover:bg-green-500 rounded-lg shadow-md ml-4" size="large" onClick={setWithDraw}>
+                Withdraw
+              </Button>
+            </div>
+          </Card>
+        </Col>
+        <Col span={24} md={8}>
+          <Card className="p-4 shadow-lg rounded-lg">
+            <Statistic
+              title="Percentage Earned on Crop"
+              value={12.5} // Example value, replace with dynamic value
+              precision={2}
+              suffix="%"
+              valueStyle={{ color: '#3f8600' }}
+            />
+          </Card>
+        </Col>
+        <Col span={24} md={8}>
+          <Card className="p-4 shadow-lg rounded-lg">
+            <Statistic
+              title="Number of Investors"
+              value={50} // Example value, replace with dynamic value
+              prefix={<TeamOutlined />}
+              valueStyle={{ color: '#3f8600' }}
+            />
+          </Card>
+        </Col>
+      </Row>
+      <Modal
+        open={withDrawModal}
+        onCancel={() => setWithDrawModal(false)}
+        footer={null}
+        width={800}
+        className="custom-modal"
+      >
+        <div className="flex flex-col items-center">
+          <Input
+            className="mb-4"
+            placeholder="Enter amount"
+            type='number'
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <Button 
+            className="bg-green-400 text-white hover:bg-green-500 rounded-lg shadow-md"
+            size="large"
+            onClick={handleConfirm}
+          >
+            Confirm
+          </Button>
+        </div>
+      </Modal>
+    </div>
     </div>
     
 
@@ -302,13 +351,13 @@ const FarmerDashboard = () => {
                 <div className="font-bold">Ownership</div>
                 {/* Example Entries */}
                 <div>Akshat</div>
-                <div>$250,000</div>
+                <div>₹250,000</div>
                 <div>10%</div>
                 <div>Aman</div>
-                <div>$150,000</div>
+                <div>₹150,000</div>
                 <div>5%</div>
                 <div>Harsh</div>
-                <div>$100,000</div>
+                <div>₹100,000</div>
                 <div>3%</div>
               </div>
             </div>
@@ -366,13 +415,13 @@ const FarmerDashboard = () => {
                 <div className="font-bold">Ownership</div>
                 {/* Example Entries */}
                 <div>John Doe</div>
-                <div>$250,000</div>
+                <div>₹250,000</div>
                 <div>10%</div>
                 <div>Jane Smith</div>
-                <div>$150,000</div>
+                <div>₹150,000</div>
                 <div>5%</div>
                 <div>Robert Brown</div>
-                <div>$100,000</div>
+                <div>₹100,000</div>
                 <div>3%</div>
               </div>
             </div>

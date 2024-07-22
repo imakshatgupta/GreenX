@@ -48,9 +48,9 @@ export default function Portfolio() {
 
 
   const cropData = [
-    { key: '1', crop: 'Corn', value: '$80,000', profitLoss: '+$5,000', percentage: '32%', profitLossClass: 'text-green-500' },
-    { key: '2', crop: 'Soybeans', value: '$60,000', profitLoss: '+$3,000', percentage: '24%', profitLossClass: 'text-green-500' },
-    { key: '3', crop: 'Wheat', value: '$40,000', profitLoss: '-$2,000', percentage: '16%', profitLossClass: 'text-red-500' },
+    { key: '1', crop: 'Corn', value: '₹80,000', profitLoss: '+₹5,000', percentage: '32%', profitLossClass: 'text-green-500' },
+    { key: '2', crop: 'Soybeans', value: '₹60,000', profitLoss: '+₹3,000', percentage: '24%', profitLossClass: 'text-green-500' },
+    { key: '3', crop: 'Wheat', value: '₹40,000', profitLoss: '-₹2,000', percentage: '16%', profitLossClass: 'text-red-500' },
   ];
 
   const cardData = [
@@ -100,16 +100,16 @@ export default function Portfolio() {
   };
   // Data for trending profitable crops
   const trendingCrops = [
-    { key: '1', crop: 'Saffron', rate: 'Rs.3,000/kg', profit: '+$500/kg', image: saffron },
-    { key: '2', crop: 'Sandalwood', rate: 'Rs.1,200/kg', profit: '+$300/kg', image: sandalwood },
-    { key: '3', crop: 'Avocado', rate: 'Rs.1,800/ton', profit: '+$200/ton', image: avocado},
+    { key: '1', crop: 'Saffron', rate: 'Rs.3,000/kg', profit: '+₹500/kg', image: saffron },
+    { key: '2', crop: 'Sandalwood', rate: 'Rs.1,200/kg', profit: '+₹300/kg', image: sandalwood },
+    { key: '3', crop: 'Avocado', rate: 'Rs.1,800/ton', profit: '+₹200/ton', image: avocado},
   ];
 
   return (
 <div className="min-h-screen bg-gray-100">
 <div className="container mx-auto mt-4">
             <header className="bg-teal-600 text-white py-4 px-6 md:px-10 flex items-center justify-between shadow-md rounded-2xl">
-                <Link to="/home" className="flex items-center gap-2 text-lg font-semibold">
+                <Link to="/" className="flex items-center gap-2 text-lg font-semibold">
                     <span className="text-2xl">GreenX</span>
                 </Link>
                 <nav className="hidden md:flex items-center gap-6 text-lg font-bold">
@@ -130,7 +130,7 @@ export default function Portfolio() {
                 title="Total Investment"
                 description={
                   <>
-                    <div className="text-2xl font-bold text-blue-600">$125,231.89</div>
+                    <div className="text-2xl font-bold text-blue-600">₹125,231.89</div>
                     <p className="text-xs text-gray-600">+10.2% from last quarter</p>
                   </>
                 }
@@ -144,7 +144,7 @@ export default function Portfolio() {
                 title="Total Returns"
                 description={
                   <>
-                    <div className="text-2xl font-bold text-yellow-600">$15,231.89</div>
+                    <div className="text-2xl font-bold text-yellow-600">₹15,231.89</div>
                     <p className="text-xs text-gray-600">+15.1% from last quarter</p>
                   </>
                 }
@@ -268,7 +268,7 @@ export default function Portfolio() {
                 {card.content.map((item, idx) => (
                   <div className="grid gap-2" key={idx}>
                     <div className="text-sm font-medium text-gray-600">{item.label}</div>
-                    <div className={`text-2xl font-bold ${item.valueClass}`}>{item.value}</div>
+                    <div className={`text-2xl font-bold ₹{item.valueClass}`}>{item.value}</div>
                   </div>
                 ))}
               </div>

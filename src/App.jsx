@@ -14,13 +14,13 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<PhoneWallet />} />
-          <Route path='/home' element={<Hero />} />
+          {/* <Route path="/" element={<PhoneWallet />} /> */}
+          <Route path='/' element={<Hero />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/cropform" element={<CropForm />} />
           <Route path="/farmerdashboard" element={<FarmerDashboard />} />
           <Route path="/temp" element={<Temp />} />
-            <Route path='/test' element={<Test />} />
+          <Route path='/test' element={<Test />} />
           <Route path='/home' element={<Hero/>} />
           <Route path='/farmerdashboard' element={<FarmerDashboard/>} />
           <Route path='/kyc' element={<Kyc/>} />
